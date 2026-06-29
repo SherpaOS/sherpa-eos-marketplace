@@ -58,5 +58,3 @@ EOS runs either way — Strety just adds the live data layer.
 ## Part of Sherpa OS
 
 `sherpa-eos` is one module of the **Sherpa OS** owner-operating-system. Run it alone for EOS, or add `sherpa-core` (onboarding + owner profile) and `sherpa-owner` (the cross-entity Owner Daily Brief) for the full stack. — Sherpa HQ / Jamie White · https://s4o.ai
-
-✕Merlin
