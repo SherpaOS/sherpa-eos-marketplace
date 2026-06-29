@@ -1,0 +1,19 @@
+{
+  "name": "sherpa-eos",
+  "owner": {
+    "name": "Sherpa HQ / Jamie White",
+    "url": "https://s4o.ai"
+  },
+  "metadata": {
+    "description": "Public marketplace for the Sherpa EOS plugin. Mirror of the sherpa-eos module from Sherpa OS.",
+    "version": "0.5.0"
+  },
+  "plugins": [
+    {
+      "name": "sherpa-eos",
+      "source": "./plugins/sherpa-eos",
+      "description": "EOS module — eos-intake builds the foundation (Rocks, Scorecard, Accountability Chart, V/TO); eos-operator runs the weekly cadence (L10, check-ins, IDS).",
+      "author": { "name": "Sherpa HQ / Jamie White" }
+    }
+  ]
+}
