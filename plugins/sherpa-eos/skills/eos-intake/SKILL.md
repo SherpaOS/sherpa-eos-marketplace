@@ -94,5 +94,3 @@ Templates and field lists are a neutral way to organize the user's own business 
 - 0.3.0 — Templatized for any connected user (runtime identity via `get_my_profile`, no hard-coded IDs). Added company-vs-team detection with a conditional database choice for team-level users. Reads existing V/TO and state before interviewing. V/TO placement handed to eos-operator.
 - 0.2.0 — Switched writes to the Strety MCP (dropped browser and paste-block paths). Owner layer placed in the person space inside shared orgs. Boolean metric defined as a number with an equals-1 goal.
 - 0.1.0 — Initial build: Rocks, Scorecard, Accountability Chart, V/TO interview.
-
-✕Merlin
