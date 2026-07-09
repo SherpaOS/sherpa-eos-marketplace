@@ -1,7 +1,7 @@
 {
   "name": "sherpa-eos",
-  "version": "0.5.0",
-  "description": "Sherpa EOS module — stand up and run an owner's EOS in Strety. eos-intake builds the foundation (Rocks, Scorecard, Accountability Chart, V/TO); eos-operator runs the weekly cadence (L10, check-ins, IDS).",
+  "version": "0.6.0",
+  "description": "Sherpa EOS module — stand up and run an owner's EOS in Strety. eos-intake builds the foundation (Rocks, Scorecard, Accountability Chart, V/TO); eos-operator runs the weekly cadence (L10, check-ins, IDS) plus the SMART Rock Audit, quarterly prep, and the Zoom→Strety post-L10 harvest.",
   "author": { "name": "Sherpa HQ / Jamie White" },
   "homepage": "https://s4o.ai"
 }

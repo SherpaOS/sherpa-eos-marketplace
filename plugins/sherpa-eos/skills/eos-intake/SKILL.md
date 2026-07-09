@@ -1,6 +1,6 @@
 ---
 name: eos-intake
-version: 0.5.0
+version: 0.6.0
 description: Stand up an owner's EOS foundation in Strety and populate it. The setup half of the pair; eos-operator runs it day to day. Use whenever a user is starting EOS, wants to build their first quarterly Rocks, start a Scorecard, map their Accountability Chart, or capture their V/TO inputs. Trigger on "set up my EOS," "build my rocks," "start my scorecard," "stand up Strety." Resolves the user at runtime, so it works for any connected user. Shareable across a cohort. On a full Sherpa install it runs after setup-orchestrator + build-owner-profile and reads the owner profile (CLAUDE.md); installed standalone it runs self-contained.
 ---
 
@@ -28,10 +28,11 @@ Pull first, interview only for gaps. Do not ask anything already in memory, the 
 
 1. Resolve identity and the owner layer (above).
 2. Accountability Chart = the seats the owner currently wears, which doubles as the Automate then Delegate then Eliminate map.
-3. Quarterly Rocks, one owner each, tagged CONTROL or MONEY or KILL, due end of the coming quarter.
+3. Quarterly Rocks, one owner each, tagged CONTROL or MONEY or KILL, due end of the coming quarter — **each with a SMART done-condition written into the description ("Done = …"), verifiable and dated. A rock without a done-condition does not get written.**
 4. Scorecard rows and weekly goals. Start lean (3 to 7) and grow toward 5 to 15 as numbers earn their place.
 5. Collect V/TO inputs (see handoff below) into the state file. The Operator places and maintains the V/TO.
 6. Write Rocks and metrics to Strety over MCP; record everything in the state file.
+7. **Offer the Rock → Project cascade** (owned by eos-operator): for each rock the user wants scaffolded, create a linked project, outline it, and batch milestone to-dos to the backlog on approval. Rock-setting ends with an execution plan, not a title.
 
 ## Step 1: Pull what exists
 
@@ -69,7 +70,7 @@ If the user runs without a leadership team:
 
 ## Step 4: Write to Strety (MCP)
 
-Write Rocks and metrics directly over the Strety MCP. Batch the create calls in one block. Terminal or destructive actions (cancel or complete a rock) need an in-UI approval tap, so flag those instead of retrying. Report any failure plainly, never fake a write. A boolean metric (e.g. "did the L10 happen") is a number metric with target_type 'eq' and target_value 1. Mirror state to the state file.
+Write Rocks and metrics directly over the Strety MCP. **Dedupe before create: `search` the target space for a near-match before any `create_rock` / `create_metric` / `create_todo`; found one → update or comment instead of duplicating.** Batch the create calls in one block. Terminal or destructive actions (cancel or complete a rock) need an in-UI approval tap, so flag those instead of retrying. Report any failure plainly, never fake a write. A boolean metric (e.g. "did the L10 happen") is a number metric with target_type 'eq' and target_value 1. Anything created for another person carries "created by Claude on [user]'s behalf." Mirror state to the state file.
 
 ## V/TO handoff
 
@@ -77,7 +78,7 @@ Collect the V/TO content during the interview and store it in the **pinned V/TO 
 
 ## Definition of done
 
-The user's **team space(s)** hold the Accountability Chart (seats), a lean Scorecard with weekly goals, and this quarter's Rocks with owners and CONTROL/MONEY tags. V/TO inputs live in the pinned store (and mirror to the state file) for the Operator. No field left as a silent blank; mark unknowns as draft placeholders.
+The user's **team space(s)** hold the Accountability Chart (seats), a lean Scorecard with weekly goals, and this quarter's Rocks with owners, CONTROL/MONEY/KILL tags, **and SMART done-conditions** (they must pass eos-operator's SMART Rock Audit on day one). V/TO inputs live in the pinned store (and mirror to the state file) for the Operator. No field left as a silent blank; mark unknowns as draft placeholders.
 
 **Close every run by telling the user exactly where each artifact landed** — which Strety team space holds the Rocks and Scorecard, and which store (Notion page / Doc / state file) holds the V/TO. Never let the user believe something was "filled in" when it only went to a file they can't see. Then hand off to the Operator.
 
@@ -87,10 +88,9 @@ Templates and field lists are a neutral way to organize the user's own business 
 
 ## Changelog
 
+- 0.6.0 — Rocks must carry a SMART done-condition to be written (audit-proof on day one). Added the Rock→Project cascade handoff at the end of the build. Dedupe-before-create and Claude-attribution rules on all writes. (From the Strety MCP workshop, 2026-07-08.)
 - 0.5.0 — Hardened the shared-org case: ownership is inferred from org size/structure not the Strety role (Admin in a 200+ person cohort is still a member, not an owner); the V/TO store is pinned to the owner profile and confirmed to the user; every run ends by reporting exactly where each artifact was written. Never writes a read-only shared company V/TO.
-
 - 0.4.0 — Profile-aware: reads the owner profile (CLAUDE.md) first and maps Mount Everest / team / entities into V/TO seeds; runs after setup-orchestrator + build-owner-profile on a full install, self-contained standalone. Asks only the EOS-specific gaps.
-
 - 0.3.0 — Templatized for any connected user (runtime identity via `get_my_profile`, no hard-coded IDs). Added company-vs-team detection with a conditional database choice for team-level users. Reads existing V/TO and state before interviewing. V/TO placement handed to eos-operator.
 - 0.2.0 — Switched writes to the Strety MCP (dropped browser and paste-block paths). Owner layer placed in the person space inside shared orgs. Boolean metric defined as a number with an equals-1 goal.
 - 0.1.0 — Initial build: Rocks, Scorecard, Accountability Chart, V/TO interview.
